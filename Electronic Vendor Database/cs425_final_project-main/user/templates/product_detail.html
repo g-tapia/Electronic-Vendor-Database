@@ -1,0 +1,66 @@
+{% load static %}
+{% load mathfilters %}
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+
+<div class = "container my-3">
+    <table class = "table">
+        <thead>
+        <tr class = "table-dark">
+            <th> Name </th>
+            <th> manufacturer </th>
+            <th> category </th>
+            <th> Price </th>
+        </tr>
+    </thead>
+    <tbody>
+    
+    <tr>
+        <td>{{ product_detail.p_name}} </td> 
+        <td>{{ product_detail.manufacturer_id__manufacturer_name}}</td>
+        <td>{{ product_detail.category}} </td> 
+        <td> {{ product_detail.instore_price}}</td>
+    </tr>
+    </table>
+    {% if quantity.quantity > 30 %}
+        IN STOCK! <br>
+        {{quantity.quantity}} left
+        <div class="wrapper" style="text-align: right;">
+            {% if user.is_authenticated %}
+                <h2>add this to cart</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    quantity: <br>
+                    <input name="quantity" type="quantity">
+                    <br>
+                    <input type="submit" class="btn btn-primary" value="add to cart">
+                </form>
+            {% else %}
+                <h1> buy this now </h1>
+                <form method="POST">
+                    {% csrf_token %}
+                    quantity: <input name="quantity" type="quantity">
+                    <input type="submit" class="btn btn-primary" value="add to cart">
+                </form>
+            {% endif %}   
+        </div>
+    {% elif quantity.quantity == 0  %}
+        Out of Stock! <br> 
+    {% else %}
+        Low in Stock! <br>
+        {{quantity.quantity}} left
+        <div class="wrapper" style="text-align: center;">
+            <h1>add this to cart</h1>
+    
+            <form method="POST">
+                {% csrf_token %}
+                quantity: <br>
+                <input name="quantity" type="quantity">
+                <br>
+                <input type="submit" class="btn btn-primary" value="add to cart">
+            </form>
+        </div>
+    {% endif %}
+
+
+    <a href = "/">go back</a>
+</div>

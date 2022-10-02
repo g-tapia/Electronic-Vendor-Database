@@ -1,0 +1,163 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+
+<script type = "text/javascript">
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function uuidv4() {
+        return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+          (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        );
+    }
+    let device = getCookie('device')
+
+    if(device== null || device == undefined ){
+        device = uuidv4()
+    }
+
+    document.cookie = 'device=' + device + ";domain=;path=/"
+
+</script>
+
+{% if user.is_authenticated %}
+    <div class="wrapper" style="text-align: center;">
+        <div class = "container my-3">
+            <table class = "table">
+            <thead>
+                <tr class = "table-dark">
+                    <th> Hello, {{username}}</th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                    <th></th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <td><a href="logout">log out</a> &nbsp <a href = "edit">edit my info</a></td>
+                <td> <a href = "history"> my purchase history </a></td>
+                <td><a href = "card"> my cards </a></td>
+                <td> <a href = "address"> my address </a></td>
+                <td> <a href = "cart">cart</a></td>
+            </tbody>
+
+            </table>
+        </div>
+    </div>
+
+{% else %}
+    <div class="wrapper" style="text-align: center;">
+        <div class = "container my-3">
+            <table class = "table">
+            <thead>
+                <tr class = "table-dark">
+                    <th>welcome, please sign in</th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                    <th></th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <td></td>
+                <td><a href="signup">sign up</a></td>
+                <td><a href="login">log in</a></td>
+                <td><a href = "cart"> cart </a></td>
+            </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endif %}
+
+<div class = "container my-3">
+    <table class = "table">
+        <thead>
+        <tr class = "table-dark">
+            <th></th>
+            <th> Product Name </th>
+            <th>
+            <form method = "POST">
+                {% csrf_token %}
+                Category
+                <br>
+                <select name = 'category'>
+                <option value = "all"> category </option>
+                {% if category_list %}
+                {% for category in category_list%}
+                    <option value = {{category.category}}>{{category.category}}</option>
+                {% endfor %}
+                {% endif %}    
+                </select> 
+            <form>
+            </th>
+            <th>
+                Manufacturer
+                <br>
+                <form method = "POST">
+                    {% csrf_token %}
+                    <select name = 'man'>
+                        <option value = "all"> manufacturer </option>
+                        {% if manufacturer_list %}
+                        {% for manufacturer in manufacturer_list%}
+                        <option value = {{manufacturer.manufacturer_id}}>{{manufacturer.manufacturer_name}}</option>
+                        {% endfor %}
+                        {% endif %}    
+                       
+                      
+                    </select> 
+                <form>
+            </th>
+            <th>
+                <form>
+                    {% csrf_token %} 
+                    <input type="submit" class="btn btn-primary" value="Apply">
+                </form>
+            </th>
+            <th> Price </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% if product_list %}
+    {%for product in product_list%}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td><a href = "/{{product.p_id}}">{{ product.p_name }}</a></td>
+        <td> {{product.category}}</td>
+        <td>{{product.manufacturer__manufacturer_name}}</td>
+        <td></td>
+        <td>{{product.instore_price}} USD</td>
+
+    </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td>NO product</td>
+        </tr>
+        {% endif %}
+
+        </tbody>
+
+    </table>
+
+</div>
+

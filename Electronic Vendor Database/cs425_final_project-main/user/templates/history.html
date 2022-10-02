@@ -1,0 +1,37 @@
+{% load static %}
+{% load mathfilters %}
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+
+<div class = "container my-3">
+    <table class = "table">
+        <thead>
+        <tr class = "table-dark">
+            <th></th>
+            <th> date </th>
+            <th> product </th>
+            <th> qunatity </th>
+            <th> card </th>
+            <th>address</th>
+            <th> phone </th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% if history %}
+    {%for hist in history %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{ hist.order_date}}</td>
+        <td> {{hist.p__p_name}} </td>
+        <td> {{hist.quantity}}</td>
+        <td>{{hist.card_info}}</td>
+        <td> {{hist.address1}} {{hist.address2}}{{hist.state}}{{hist.zip_code}}</td>
+        <td> {{hist.phone_num}} </td>
+
+    </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+    </table>
+    <button class="btn btn-primary" onclick = "location.href='/';">Main page</button>
+</div>

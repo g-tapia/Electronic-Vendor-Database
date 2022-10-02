@@ -1,0 +1,41 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+
+<div class = "container my-3">
+    <table class = "table">
+        <thead>
+        <tr class = "table-dark">
+            <th></th>
+            <th> card number </th>
+            <th> name on card </th>
+            <th> card expiration</th>
+            <th> Balance </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% if card_list %}
+    {%for card in card_list%}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{ card.card_num }}</td>
+        <td> {{ card.card_name}}</td>
+        <td> {{ card.card_exp_month }} {{"/"}} {{card.card_exp_year}}</td>
+        <td> {{card.balance}} USD </td>
+        <td> <button class="btn btn-primary" onclick = "location.href='/card/{{card.card_num}}/delete';" >delete </button> </td>
+    </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td>NO Card</td>
+        </tr>
+        {% endif %}
+
+        </tbody>
+
+    </table>
+    <a href = "new_card">new card </a>
+    <br>
+    <a href = "/">go back</a>
+</div>

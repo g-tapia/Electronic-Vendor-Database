@@ -1,0 +1,55 @@
+{% load static %}
+{% load mathfilters %}
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+
+<div class = "container my-3">
+    <table class = "table">
+        <thead>
+        <tr class = "table-dark">
+            <th></th>
+            <th> Product </th>
+            <th> unit price </th>
+            <th> qunatity </th>
+            <th> total </th>
+            <th> update quantity </th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+    {% if cart_list %}
+    {%for product in cart_list%}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{ product.p__p_name }}</td>
+        <td> {{product.p__instore_price}} USD</td>
+        <td> {{product.quantity}}</td>
+        <td>{{product.p__instore_price|mul:product.quantity}}   USD</td>
+        <td>  
+            <button class="btn btn-primary" onclick = "location.href='/cart/{{product.p}}/plus';">+ </button>  
+            <button class="btn btn-primary" onclick = "location.href='/cart/{{product.p}}/minus';">- </button>
+        </td>
+        <td>
+            <button class="btn btn-primary" onclick = "location.href='/cart/{{product.p}}/delete';" >delete </button>
+        </td> 
+    </tr>
+    
+    {% endfor %}
+    <br>
+    
+    {% else %}
+        <tr>
+            <td>NO product</td>
+        </tr>
+    {% endif %}
+
+    </tbody>
+
+    </table>
+    
+    <a href = "/">go back</a>
+    {% if cart_list %} 
+        <button class="btn btn-primary" onclick = "location.href='/checkout'", style="float: right"> proceed to check out </button>
+    {% endif %}
+</div>

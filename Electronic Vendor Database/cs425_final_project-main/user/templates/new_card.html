@@ -1,0 +1,20 @@
+<div class="wrapper" style="text-align: center;">
+    <h1>add new card</h1>
+    <form method="POST">
+        {% csrf_token %}
+        card number: <br>
+        <input name="cardnumber" type="cardnumber">
+        <br>
+        card holder name: <br>
+        <input name="cardholder" type="cardholder"> 
+        <br>
+        exp_month: <br>
+        <input name="month" type="number" min="1" max="12"> 
+        <br>
+        exp_year: <br>
+        <input name="year" type="number" min="21" max="99"> 
+        <br>
+        <input type="submit" class="btn btn-primary" value="new card">
+    </form>
+    <a href = "/user/card"> go back </a>
+</div>

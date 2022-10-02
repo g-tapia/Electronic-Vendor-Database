@@ -1,0 +1,114 @@
+{% load static %}
+{% load mathfilters %}
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+
+<div class = "container my-3">
+    Summary:
+    <table class = "table">
+        <thead>
+        <tr class = "table-dark">
+            <th></th>
+            <th> Product </th>
+            <th> unit price </th>
+            <th> qunatity </th>
+            <th> total </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% if cart_list %}
+    {%for product in cart_list%}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{ product.p__p_name }}</td>
+        <td> {{product.p__instore_price}} USD</td>
+        <td> {{product.quantity}}</td>
+        <td>{{product.p__instore_price|mul:product.quantity}}   USD</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+    </table>
+    <h2>total: {{total.tot__sum}} USD</h2>
+{% if user.is_authenticated %}
+    <form method = 'POST'>
+        {% csrf_token %}
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="inputStatus">Card</label>
+                <select name ="card" type = "card">
+                <option selected disabled>Choose a Card</option>
+                {% for card in card_list%}
+                <option value="{{card.card_num}}">{{card.card_num}}</option>
+                {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="inputStatus">Address</label>
+                <select name= "address" type= "address">
+                <option selected disabled>Choose a Address</option>
+                {% for address in address_list%}
+                <option value="{{address.address1}}">{{address.address1}}</option>
+                {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <h2> recipient </h2>
+            recipient name: <input name="r_name" type="r_name">
+            recipient phone: <input name = "r_phone"  type = "r_phone">
+        <br>
+        <input type="submit" class="btn btn-primary" value="place order">
+    </form>
+
+{% else %}
+        <h2>card</h2>
+        <form method="POST">
+            {% csrf_token %}
+            card number: <br>
+            <input name="cardnumber" type="cardnumber">
+            <br>
+            card holder name: <br>
+            <input name="cardholder" type="cardholder"> 
+            <br>
+            exp_month: <br>
+            <input name="month" type="number" min="1" max="12"> 
+            <br>
+            exp_year: <br>
+            <input name="year" type="number" min="21" max="99"> 
+            <br>
+            <br>
+
+        <h2>Address</h2>
+            street address: <br>
+            <input name="street" type="street">
+            <br>
+            Box, Apt Num: <br>
+            <input name="box" type="box"> 
+            <br>
+            State: <br>
+            <input name="state" type="state"> 
+            <br>
+            zipcode: <br>
+            <input name="zip" type="zip"> 
+            <br>
+            <br>
+        <h2>Phone </h2>
+            phone: <input name="phone" type="phone">
+            <br>
+        <h2> recipient </h2>
+            recipient name: <input name="r_name" type="r_name">
+            recipient phone: <input name = "r_phone"  type = "r_phone">
+
+            <br>
+            <input type="submit" class="btn btn-primary" value="place order">
+        </form>
+{% endif %}
+<br>
+<button class="btn btn-primary" onclick = "location.href='/';">Main page</button>
+</div>
+

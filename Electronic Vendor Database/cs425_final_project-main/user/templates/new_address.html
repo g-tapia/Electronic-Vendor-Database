@@ -1,0 +1,20 @@
+<div class="wrapper" style="text-align: center;">
+    <h1>add new address</h1>
+    <form method="POST">
+        {% csrf_token %}
+        street address: <br>
+        <input name="street" type="street">
+        <br>
+        Box, Apt Num: <br>
+        <input name="box" type="box"> 
+        <br>
+        State: <br>
+        <input name="state" type="state"> 
+        <br>
+        zipcope: <br>
+        <input name="zip" type="zip"> 
+        <br>
+        <input type="submit" class="btn btn-primary" value="new address">
+    </form>
+    <a href = "/user/address"> go back </a>
+</div>

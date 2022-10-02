@@ -1,0 +1,33 @@
+<div class="wrapper" style="text-align: center;">
+    <h1>sign_up</h1>
+    <form method="POST">
+        {% csrf_token %}
+        ID: <br>
+        <input name="username" type="text">
+        <br>
+        Password: <br>
+        <input name="password1" type="password">
+        <br>
+        retype Password: <br>
+        <input name="password2" type="password">
+        <br>
+        email: <br>
+        <input name="email" type="email">
+        <br>
+        Name: <br>
+        <input name="name" type="name">
+        <br>
+        phone: <br>
+        <input name="phone" type="phone">
+        <br>
+        type <select name = 'type'>
+            <option value = "none"> ---select----</option>
+            <option value = "1"> Normal </option>
+            <option value = "2"> Subscript </option>
+         </select>
+         <br>
+         
+        <input type="submit" class="btn btn-primary" value="Sign Up">
+    </form>
+    <a href = "/"> go back </a>
+</div>

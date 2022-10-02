@@ -1,0 +1,40 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+
+<div class = "container my-3">
+    <table class = "table">
+        <thead>
+        <tr class = "table-dark">
+            <th></th>
+            <th> address  </th>
+            <th> state </th>
+            <th> zipcode</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% if address_list%}
+    {%for address in address_list%}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{ address.address1}} 
+            {{ address.address2}}</td>
+        <td> {{ address.state}}</td>
+        <td> {{ address.zipcode}}</td>
+        <td> <button class="btn btn-primary" onclick = "location.href='/address/{{address.address1}}/delete';" >delete </button> </td>
+    </tr>
+    {% endfor %}
+    {% else %}
+        <tr>
+            <td>NO Address</td>
+        </tr>
+    {% endif %}
+
+        </tbody>
+
+    </table>
+    <a href = "new_address">new address</a>
+    <br>
+    <a href = "/">go back</a>
+</div>
