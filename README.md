@@ -4,7 +4,7 @@ Below is the Electronic Vendor Database application our team worked on. This app
 
 ## Designing the Database
 
-The design of this database started with an extensive review of articles and literature in my class book related to efficient database design. I spent a considerable amount of time understanding the business requirements of an online electronic vendor, breaking down these requirements into manageable entities, and working on how these entities would interact with each other.
+The design of this database started with an extensive review of articles and literature in my class book related to efficient database design. I spent a considerable amount of time understanding the business requirements of an online electronic vendor, breaking down these requirements into manageable entities, and working on how these entities would interact with each other. You can view the database ER diagram on the pdf.
 
 After this initial research, I decided to adopt a relational database design, considering its advantages like data integrity, data consistency, and flexibility in querying data. I carefully designed the entities (tables) in a way that ensures normalization to reduce data redundancy and improve data integrity. 
 
