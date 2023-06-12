@@ -31,7 +31,7 @@ create table member(
 
 ## Implementation
 
-Most of my efforts have been channeled towards backend development, ensuring the efficiency, security, and scalability of the application. However, I've also worked on frontend development, making sure that the application is user-friendly and intuitive.
+Most of my efforts have been channeled towards backend development, ensuring the efficiency, security, and scalability of the application. However, I also worked on frontend development.
 
 ## Testing and Usage
 
