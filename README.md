@@ -41,8 +41,7 @@ The project repository contains data scripts for the initial loading of the data
 INSERT INTO `db`.`store`(`s_id`,`address`,`state`,`zipcode`) VALUES ('s_1','Jupiter OA', 'R2','229');
 ```
 
-In order to test the functionality of this application, you may need to execute these scripts first. Following that, you may interact with the application either by using the Django interface, or by interacting with the REST API that has been designed for this purpose.
-
+In order to test the functionality of this application, you should read the pdf above. It contains a detail description on how to execute the application.
 ## Feedback
 
 While I've tested this application rigorously, I encourage you to provide any feedback you might have. I'm always open to improvement and would love to hear your suggestions on how this application could be made better. Thank you for taking the time to review my project!
